@@ -16,6 +16,6 @@ variables:
   value: 'world'
 
 steps:
-- bash: echo "$var1 $var2"
+- bash: echo "$(var1) $(var2)"
 - powershell: mvn --version
 - bash: python3 --version
