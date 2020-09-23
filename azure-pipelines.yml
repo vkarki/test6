@@ -9,4 +9,4 @@ pool:
   - python3
 
 steps:
-- powershell: "Hello World"
+- bash: echo helloworld
