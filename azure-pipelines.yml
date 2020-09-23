@@ -8,5 +8,14 @@ pool:
   - maven
   - python3
 
+variables: 
+- name: var1
+  value: 'hello'
+
+- name: var2
+  value: 'world'
+
 steps:
-- bash: echo helloworld
+- bash: echo $var1$var2
+- powershell: maven --version
+- bash: python3 --version
