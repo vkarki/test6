@@ -4,9 +4,6 @@ trigger:
 
 pool: 
   vmImage: 'ubuntu-latest'
-  demands: 
-  - maven
-  - python3
 
 variables: 
 - name: var1
@@ -15,18 +12,52 @@ variables:
 - name: var2
   value: 'world'
 
-steps:
-- bash: echo "$(var1)$(var2)"
-- powershell: mvn --version
-- bash: python3 --version
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Write your commands here
-      
-      echo 'Hello world'
-      
-      echo $(System.DefaultWorkingDirectory)
 
-      echo $(Build.BuildID)
+stages:
+- stage: Stage1
+  jobs: 
+  - job: JobA
+    pool: 
+      vmImage: 'vs2017-win2016'
+    steps:
+    - powershell: mvn --version
+
+  - job: JobB
+    steps:
+    - bash: python3 --version
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          
+          echo 'Hello world'
+          
+          echo $(System.DefaultWorkingDirectory)
+
+          echo $(Build.BuildID)
+
+
+- stage: Stage2
+  jobs: 
+  - job: JobA
+    pool: 
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: echo "$(var1)$(var2)"
+    - powershell: mvn --version
+
+  - job: JobB
+    steps:
+    - bash: python3 --version
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          
+          echo 'Hello world'
+          
+          echo $(System.DefaultWorkingDirectory)
+
+          echo $(Build.BuildID)
