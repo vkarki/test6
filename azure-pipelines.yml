@@ -19,3 +19,14 @@ steps:
 - bash: echo "$(var1)$(var2)"
 - powershell: mvn --version
 - bash: python3 --version
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo 'Hello world'
+      
+      echo $(System.WorkingDirectory)
+
+      echo $(Build.BuildID)
