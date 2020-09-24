@@ -27,6 +27,6 @@ steps:
       
       echo 'Hello world'
       
-      echo $(System.WorkingDirectory)
+      echo $(System.DefaultWorkingDirectory)
 
       echo $(Build.BuildID)
